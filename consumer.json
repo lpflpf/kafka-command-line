@@ -1,0 +1,11 @@
+{
+    "brokers": [
+        "broker-url:9092"
+    ],
+    "topics": {
+        "item1": {
+            "topic": "simpleTopic",
+            "group": "simpleTopicConsumerGroup"
+        }
+    }
+}
