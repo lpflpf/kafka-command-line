@@ -128,4 +128,4 @@ partition 5 update to 12
 ```
 
 6. 发送消息到partition 为3的分片上
-> ./kafkaHelper message send -c config.json -t topic -p 3 '{"hello":"world"}'
+> ./kafkaHelper message send -c config.json -t topic -p 3 '{"hello":"world"}' '{"hello": "word2"}'
