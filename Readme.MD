@@ -56,3 +56,20 @@
         -o int    offset (support special offset: -1 newest, -2 oldest)
         -p int    partition id
 ```
+
+### config.json
+
+a Example:
+```
+{
+    "brokers": [
+        "broker-url:9092"
+    ],
+    "topics": {
+        "item1": {
+            "topic": "simpleTopic",
+            "group": "simpleTopicConsumerGroup"
+        }
+    }
+}
+```
