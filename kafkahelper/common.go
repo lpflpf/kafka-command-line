@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Shopify/sarama"
-	cluster "github.com/bsm/sarama-cluster"
 	"github.com/qiniu/log"
 	"io/ioutil"
 	"os"
@@ -38,18 +37,6 @@ func getConfig(filename string) Config {
 		return conf
 	}
 	return Config{}
-}
-
-func getClusterClient(broker []string) *cluster.Client {
-	clusterConfig := cluster.NewConfig()
-	clusterConfig.Version = sarama.V0_10_0_0
-
-	if client, err := cluster.NewClient(broker, clusterConfig); err != nil {
-		log.Fatal(err)
-		return nil
-	} else {
-		return client
-	}
 }
 
 func getClient(broker []string) sarama.Client {

@@ -87,7 +87,7 @@ func (m *OffsetManager) setAllPartitionOffset(newOffset int64) {
 		log.Fatal("update all partition cannot be set to same offset, it must be oldest or newest.")
 	}
 
-	client := getClusterClient(m.broker)
+	client := getClient(m.broker)
 
 	offsetManager, err := sarama.NewOffsetManagerFromClient(m.group, client)
 	noError(err)
