@@ -103,13 +103,14 @@ item 为 一个topic,group对，具有唯一性
 
 > ./kafkaHelper offset set -c config.json -i item -o 12345 -p 3
 输出:
-
+```
 partition 1 update to 47
 partition 1 update to 1
 partition 2 update to 3129129
 partition 3 update to 97413
 partition 4 update to 252
 partition 5 update to 12
+```
 
 4. 获取item在partition 为 3，偏移为12345 的消息
 
