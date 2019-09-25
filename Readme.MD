@@ -1,5 +1,7 @@
 一个kafka 的消息、偏移的小工具
 
+![travis-ci.org](https://www.travis-ci.org/lpflpf/kafka-command-line.svg?branch=master)
+
 ### 解决的问题
 
 1. 获取固定偏移的消息
