@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/qiniu/log"
+	"log"
 	"os"
 )
 
@@ -74,7 +74,7 @@ func pushMessage(args []string) {
 	conf := getConfig(configPath)
 
 	if topic == "" {
-		log.Error("cannot item from Config file")
+		log.Fatal("cannot item from Config file")
 	}
 	if len(flags.Args()) > 0 {
 		message = flags.Args()
@@ -139,7 +139,7 @@ func getMessage(args []string) {
 		}
 	}
 	if topic == "" {
-		log.Error("cannot item from Config file")
+		log.Fatal("cannot item from Config file")
 	}
 
 	fetchMessage(conf.Broker, topic, int32(partition), offset, limit)
@@ -174,4 +174,3 @@ func fetchMessage(broker []string, topic string, partition int32, offset int64, 
 	err = client.Close()
 	noError(err)
 }
-

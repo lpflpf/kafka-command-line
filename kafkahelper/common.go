@@ -5,13 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/qiniu/log"
 	"io/ioutil"
+	"log"
 	"os"
 	"strconv"
 )
 
-var Logger = log.New(os.Stderr, "", log.Ldefault)
+var Logger = log.New(os.Stderr, "", log.LstdFlags)
 
 type Config struct {
 	Broker []string `json:"brokers"`
@@ -28,11 +28,11 @@ func noError(err error) {
 }
 func getConfig(filename string) Config {
 	if data, err := ioutil.ReadFile(filename); err != nil {
-		log.Error(err)
+		log.Fatal(err)
 	} else {
 		conf := Config{}
 		if err = json.Unmarshal(data, &conf); err != nil {
-			log.Error(err)
+			log.Fatal(err)
 		}
 		return conf
 	}
@@ -44,7 +44,7 @@ func getClient(broker []string) sarama.Client {
 	config.Version = sarama.V0_10_0_0
 	config.Producer.Partitioner = sarama.NewManualPartitioner
 	if client, err := sarama.NewClient(broker, config); err != nil {
-		log.Error(err)
+		log.Fatal(err)
 	} else {
 		return client
 	}
@@ -56,7 +56,7 @@ func getAdmin(broker []string) sarama.ClusterAdmin {
 	config.Version = sarama.V0_10_0_0
 
 	if admin, err := sarama.NewClusterAdmin(broker, config); err != nil {
-		log.Error(err)
+		log.Fatal(err)
 	} else {
 		return admin
 	}
@@ -102,5 +102,5 @@ func commonUsage(flags *flag.FlagSet, cmd string) {
 }
 
 func setDebug() {
-	sarama.Logger = log.New(os.Stderr, "[sarama] ", log.Ldefault)
+	sarama.Logger = log.New(os.Stderr, "[sarama] ", log.LstdFlags)
 }

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/qiniu/log"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -28,7 +28,7 @@ func (m *OffsetManager) getAllOffset() {
 	allPartition, _ := m.client.Partitions(m.topic)
 	resp, err := getAdmin(m.broker).ListConsumerGroupOffsets(m.group, map[string][]int32{m.topic: allPartition})
 	if err != nil {
-		log.Error(err)
+		log.Fatal(err)
 	}
 	sepLine := fmt.Sprintf("+%s+%s+%s+%s+\n", strings.Repeat("-", 12), strings.Repeat("-", 12), strings.Repeat("-", 12), strings.Repeat("-", 12))
 	fmt.Print(sepLine)
@@ -178,7 +178,7 @@ func getOffset(args []string) {
 	}
 
 	if val, ok := conf.Topics[item]; !ok {
-		log.Error("cannot item from Config file")
+		log.Fatal("cannot item from Config file")
 	} else {
 		manager := OffsetManager{
 			client: getClient(conf.Broker),
@@ -220,7 +220,7 @@ func setOffset(args []string) {
 	}
 
 	if val, ok := conf.Topics[item]; !ok {
-		log.Error("cannot find item from Config file")
+		log.Fatal("cannot find item from Config file")
 	} else {
 		manager := OffsetManager{
 			client: getClient(conf.Broker),
